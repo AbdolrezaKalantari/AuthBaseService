@@ -13,11 +13,11 @@ namespace AuthBaseService.Application.Validators
         public LoginDtoValidator()
         {
             RuleFor(x => x.Email)
-          .NotEmpty().WithMessage("ایمیل الزامی است.")
-          .EmailAddress().WithMessage("فرمت ایمیل معتبر نیست.");
+          .NotEmpty().WithMessage("Email is required.")
+          .EmailAddress().WithMessage("The email format is not valid.");
 
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("رمز عبور الزامی است.");
+                .NotEmpty().WithMessage("Password is required.");
         }
     }
 }

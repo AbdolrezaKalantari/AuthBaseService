@@ -38,7 +38,7 @@ namespace AuthBaseService.API.Controllers
 
             var newAccessToken = _tokenService.GenerateToken(user);
 
-            // اختیاری: تولید Refresh Token جدید و لغو قبلی
+           
             await _refreshTokenRepository.RevokeAsync(token);
             var newRefreshToken = new RefreshToken
             {

@@ -56,11 +56,11 @@ namespace AuthBaseService.Application.Services
             var user = await _userRepository.GetByEmailAsync(loginDto.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
              
-                return new TokenDto { Response = "ایمیل یا رمز عبور اشتباه است" };
+                return new TokenDto { Response = "Incorrect email or password." };
 
             if (!user.EmailConfirmed)
               
-                return new TokenDto { Response = "ایمیل شما هنوز تایید نشده است" };
+                return new TokenDto { Response = "Your email has not been verified yet." };
 
             return _tokenService.GenerateToken(user);
         }
@@ -82,8 +82,7 @@ namespace AuthBaseService.Application.Services
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded)
-            {
-                // throw new Exception("User creation failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+            {           
                 return new UserDto { Response = "User creation failed: " + string.Join(", ", result.Errors.Select(e => e.Description)) };
             }
             var token = Guid.NewGuid().ToString();
